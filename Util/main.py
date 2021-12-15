@@ -93,7 +93,7 @@ def reply_admin(text, chat_id):
 def remove_admin(names):
     for name in names:
         user_chat_id = find_chat_id(name)
-        if (is_admin_exists(user_chat_id)):
+        if is_admin_exists(user_chat_id):
             admin = {'chat_id': user_chat_id, 'username': name}
             admins.remove(admin)
 
@@ -103,7 +103,7 @@ def get_text(update):
 
 
 def add_user(chat_id, username):
-    if (is_user_exists(chat_id)):
+    if is_user_exists(chat_id):
         return
     usr = {'chat_id': chat_id, 'username': username}
     users.append(usr)
