@@ -1,0 +1,22 @@
+update = {
+  'update_id': 108826025,
+  'message': {
+    'message_id': 339,
+    'from': {
+      'id': 168224409,
+      'is_bot': False,
+      'first_name': 'Анастасия 🌅',
+      'username': 'HACTEHbKA',
+      'language_code': 'ru'
+    },
+    'chat': {
+      'id': 168224409,
+      'first_name': 'Анастасия 🌅',
+      'username': 'HACTEHbKA',
+      'type': 'private'
+    },
+    'date': 1636057214,
+    'text': '/start',
+    'entities': [{'offset': 0, 'length': 6, 'type': 'bot_command'}]
+  }
+}
