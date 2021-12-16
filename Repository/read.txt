@@ -1,0 +1,4 @@
+Here we implement the repository pattern.
+
+Store collection of users and admins etc. We have some getters and setters.
+To interact with handlers.
