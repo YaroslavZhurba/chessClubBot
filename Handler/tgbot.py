@@ -30,5 +30,5 @@ def shutdown():
     TelegramBot.getUpdates(update_id)
 
 
-def sent_message(user_chat_id, message):
+def send_message(user_chat_id, message):
     TelegramBot.sendMessage(user_chat_id, message)

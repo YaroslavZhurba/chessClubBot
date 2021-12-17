@@ -7,6 +7,7 @@ sys.path.append(absolute_path + '/DataRW')
 sys.path.append(absolute_path + '/Handler')
 sys.path.append(absolute_path + '/Parser')
 sys.path.append(absolute_path + '/Repository')
+sys.path.append(absolute_path + '/States')
 print(sys.path)
 import handler
 

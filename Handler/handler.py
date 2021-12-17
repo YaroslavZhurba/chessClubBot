@@ -2,45 +2,47 @@ import collection
 import parser
 import update_handler
 import tgbot
-import default_messages
+import configs
 
 
 def ask_users(names):
     for name in names:
         user_chat_id = collection.find_user_chat_id(name)
-        tgbot.sent_message(user_chat_id, default_messages.why_no_attendance())
+        tgbot.send_message(user_chat_id, configs.why_no_attendance)
 
 
 def list_admins(user_chat_id):
-    tgbot.sent_message(user_chat_id, "список админов:")
+    tgbot.send_message(user_chat_id, "список админов:")
     admins = collection.get_all_admins()
     for admin in admins:
-        tgbot.sent_message(user_chat_id, admin["username"])
+        tgbot.send_message(user_chat_id, admin["username"])
 
 
 def list_users(user_chat_id):
-    tgbot.sent_message(user_chat_id, "список пользователей:")
+    tgbot.send_message(user_chat_id, "список пользователей:")
     users = collection.get_all_users()
     for user in users:
-        tgbot.sent_message(user_chat_id, user["username"])
+        tgbot.send_message(user_chat_id, user["username"])
 
+
+# True -> continue working
+# False -> shutdown
 def reply_admin(text, user_chat_id):
-    command = parser.get_command(text)
+    command, args = parser.get_command_and_args(text)
     if command == 'exit':
         return False
-    lst = parser.get_text_body(command, text).split(',')
     if command == 'ask':
-        ask_users(lst)
+        ask_users(args)
     elif command == 'add_admins':
-        collection.add_admins(lst)
+        collection.add_admins(args)
     elif command == 'remove_admins':
-        collection.remove_admins(lst)
+        collection.remove_admins(args)
     elif command == 'list_admins':
         list_admins(user_chat_id)
     elif command == 'list_users':
         list_users(user_chat_id)
     else:
-        tgbot.sent_message(user_chat_id, default_messages.admin_greeting())
+        tgbot.send_message(user_chat_id, configs.admin_greeting)
     return True
 
 
@@ -76,9 +78,11 @@ def run():
 
     while True:
         updates = tgbot.get_updates()
+        # print(str(updates))
+        # tgbot.shutdown()
         if updates is None:
             continue
         if process(updates) is False:
             break
     tgbot.shutdown()
-    print(str(updates))
+    # print(str(updates))

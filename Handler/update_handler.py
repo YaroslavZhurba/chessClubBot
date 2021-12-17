@@ -14,5 +14,3 @@ def is_update_has_message(update):
     if update.get('message') is not None:
         return True
     return False
-
-
