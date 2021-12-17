@@ -2,3 +2,89 @@ Here we implement the repository pattern.
 
 Store collection of users and admins etc. We have some getters and setters.
 To interact with handlers.
+
+
+
+
+
+
+
+Maybe this code will be need in the future:
+
+# Success -> True
+# Failed -> False
+def set_default_user_states_by_user_chat_id(user_chat_id):
+    user_index = get_user_index_by_user_chat_id(user_chat_id)
+    if user_index is None:
+        return False
+    users[user_index]["state"] = configs.default_state_id
+    users[user_index]["substate"] = 0
+    users[user_index]["random_state"] = 0
+    rw.write_users(users)
+    return True
+
+
+# Success -> True
+# Failed -> False
+def set_user_state_by_user_chat_id(user_chat_id, state_id):
+    user_index = get_user_index_by_user_chat_id(user_chat_id)
+    if user_index is None:
+        return False
+    users[user_index]["state"] = state_id
+    rw.write_users(users)
+    return True
+
+
+# Success -> True
+# Failed -> False
+def set_user_substate_by_user_chat_id(user_chat_id, substate_id):
+    user_index = get_user_index_by_user_chat_id(user_chat_id)
+    if user_index is None:
+        return False
+    users[user_index]["substate"] = substate_id
+    rw.write_users(users)
+    return True
+
+
+# Success -> True
+# Failed -> False
+def set_user_random_state_by_user_chat_id(user_chat_id, random_state_id):
+    user_index = get_user_index_by_user_chat_id(user_chat_id)
+    if user_index is None:
+        return False
+    users[user_index]["random_state"] = random_state_id
+    rw.write_users(users)
+    return True
+
+
+# Success -> state
+# Failed -> None
+def get_user_state_by_user_chat_id(user_chat_id, state_id):
+    user_index = get_user_index_by_user_chat_id(user_chat_id)
+    if user_index is None:
+        return False
+    users[user_index]["state"] = state_id
+    rw.write_users(users)
+    return True
+
+
+# Success -> substate
+# Failed -> None
+def get_user_substate_by_user_chat_id(user_chat_id, substate_id):
+    user_index = get_user_index_by_user_chat_id(user_chat_id)
+    if user_index is None:
+        return False
+    users[user_index]["substate"] = substate_id
+    rw.write_users(users)
+    return True
+
+
+# Success -> random_state
+# Failed ->
+def get_user_random_state_by_user_chat_id(user_chat_id):
+    user_index = get_user_index_by_user_chat_id(user_chat_id)
+    if user_index is None:
+        return None
+    user_handler.users[user_index]
+    rw.write_users(users)
+    return True

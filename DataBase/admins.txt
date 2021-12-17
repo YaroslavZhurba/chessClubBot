@@ -1,1 +1,0 @@
-[{"chat_id": 399682596, "username": "Yaroslav239"}]

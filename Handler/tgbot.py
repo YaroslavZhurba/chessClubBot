@@ -1,4 +1,5 @@
 import telepot
+import configs
 
 token = '2091745164:AAEhI5BJicvgcPVxTwpHedFLwha6vSQLbL0'
 TelegramBot = telepot.Bot(token)
@@ -12,6 +13,7 @@ def init_update_id() -> bool:
     updates = TelegramBot.getUpdates()
     if len(updates) > 0:
         update_id = updates[0]['update_id']
+        configs.shutdown = False
         return True
     return False
 
