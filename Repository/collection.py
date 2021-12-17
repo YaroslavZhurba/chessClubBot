@@ -1,14 +1,9 @@
 import rw
+import user_handler
+import configs
 
 # local functions and variables
 users = None
-admins = None
-
-
-def before_admins():
-    global admins
-    if admins is None:
-        admins = rw.read_admins()
 
 
 def before_users():
@@ -17,19 +12,37 @@ def before_users():
         users = rw.read_users()
 
 
+def get_user_index_by_user_chat_id(user_chat_id):
+    before_users()
+    for i in range(len(users)):
+        user = users[i]
+        if user_handler.get_user_chat_id(user) == user_chat_id:
+            return i
+    return None
+
+
+def get_user_index_by_user_name(user_name):
+    before_users()
+    for i in range(len(users)):
+        user = users[i]
+        if user_handler.get_user_name(user) == user_name:
+            return i
+    return None
+
+
+# todo rewrite ???
 def add_admin_local(admin_name):
-    user_chat_id = find_user_chat_id(admin_name)
-    if not is_admin_exists(user_chat_id):
-        admin = {'chat_id': user_chat_id, 'username': admin_name}
-        admins.append(admin)
+    before_users()
+    admin_index = get_user_index_by_user_name(admin_name)
+    users[admin_index]["permission"] = configs.admin_permission
 
 
 # public functions and variables
-def find_user_chat_id(name):
+def find_user_chat_id(user_name):
     before_users()
     for user in users:
-        if user['username'] == name:
-            return user['chat_id']
+        if user_handler.get_user_name(user) == user_name:
+            return user_handler.get_user_chat_id(user)
     return None
 
 
@@ -39,65 +52,69 @@ def get_all_users():
 
 
 def get_all_admins():
-    before_admins()
+    before_users()
+    admins = []
+    for user in users:
+        if user_handler.get_user_permission(user) == configs.admin_permission:
+            admins.append(user)
     return admins
 
 
-def is_user_exists(chat_id):
+def is_user_exists(user_chat_id):
+    before_users()
+    if get_user_index_by_user_chat_id(user_chat_id) is None:
+        return False
+    return True
+
+
+# todo rewrite ??
+def is_admin_exists(admin_chat_id):
     before_users()
     for user in users:
-        if user['chat_id'] == chat_id:
+        if user_handler.get_user_chat_id(user) == admin_chat_id and \
+                user_handler.get_user_permission(user) == configs.admin_permission:
             return True
     return False
 
 
-def is_admin_exists(chat_id):
-    before_admins()
-    for admin in admins:
-        if admin['chat_id'] == chat_id:
-            return True
-    return False
+def add_admin_by_name(admin_name):
+    before_users()
+    admin_index = get_user_index_by_user_name(admin_name)
+    users[admin_index]["permission"] = configs.admin_permission
+    rw.write_users(users)
 
 
-def add_admin(admin_name):
-    before_admins()
-    user_chat_id = find_user_chat_id(admin_name)
-    if not is_admin_exists(user_chat_id):
-        admin = {'chat_id': user_chat_id, 'username': admin_name}
-        admins.append(admin)
-
-
-def add_admins(admin_names):
-    before_admins()
+def add_admins_by_name(admin_names):
+    before_users()
     for admin_name in admin_names:
         add_admin_local(admin_name)
-    rw.write_admins(admins)
+    rw.write_users(users)
 
 
 def add_user(chat_id, username):
     before_users()
     if is_user_exists(chat_id):
         return
-    user = {'chat_id': chat_id, 'username': username}
+    user = {'chat_id': chat_id, 'username': username,
+            'permission' : configs.user_permission, "state" : configs.default_state_id,
+            }
     users.append(user)
     rw.write_users(users)
 
 
 def remove_admins(admin_names):
-    before_admins()
+    before_users()
     for admin_name in admin_names:
-        user_chat_id = find_user_chat_id(admin_name)
-        if is_admin_exists(user_chat_id):
-            admin = {'chat_id': user_chat_id, 'username': admin_name}
-            admins.remove(admin)
-    rw.write_admins(admins)
+        admin_index = get_user_index_by_user_name(admin_name)
+        if admin_index is not None:
+            users[admin_index]["permission"] = configs.user_permission
+    rw.write_usesrs(users)
 
 
-def is_user_admin(chat_id):
-    before_admins()
-    for admin in admins:
-        if chat_id == admin['chat_id']:
-            return True
+def is_user_admin(user_chat_id):
+    admin_index = get_user_index_by_user_chat_id(user_chat_id)
+    if admin_index is not None and user_handler.get_user_permission(users[admin_index]) == configs.admin_permission:
+        return True
     return False
 
 # var = None

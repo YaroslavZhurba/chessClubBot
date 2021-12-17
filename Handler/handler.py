@@ -33,8 +33,8 @@ def reply_admin(text, user_chat_id):
         return False
     if command == 'ask':
         ask_users(args)
-    elif command == 'add_admins':
-        collection.add_admins(args)
+    elif command == 'add_admins_by_name':
+        collection.add_admins_by_name(args)
     elif command == 'remove_admins':
         collection.remove_admins(args)
     elif command == 'list_admins':
