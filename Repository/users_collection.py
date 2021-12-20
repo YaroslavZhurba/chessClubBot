@@ -35,7 +35,7 @@ def get_user_index_by_user_name(user_name):
 def add_admin_local(admin_name):
     before_users()
     admin_index = get_user_index_by_user_name(admin_name)
-    user_handler.set_user_permission(db[admin_index], configs.admin_permission)
+    user_handler.set_user_permission(db[admin_index], configs.Permissions.admin)
 
 
 # public functions and variables
@@ -56,7 +56,7 @@ def get_all_admins():
     before_users()
     admins = []
     for user in db:
-        if user_handler.get_user_permission(user) == configs.admin_permission:
+        if user_handler.get_user_permission(user) == configs.Permissions.admin:
             admins.append(user)
     return admins
 
@@ -73,7 +73,7 @@ def is_admin_exists(admin_chat_id):
     before_users()
     for user in db:
         if user_handler.get_user_chat_id(user) == admin_chat_id and \
-                user_handler.get_user_permission(user) == configs.admin_permission:
+                user_handler.get_user_permission(user) == configs.Permissions.admin:
             return True
     return False
 
@@ -86,8 +86,8 @@ def add_admin_by_name(admin_name):
     admin_index = get_user_index_by_user_name(admin_name)
     if admin_index is None:
         return False
-    user_handler.set_user_permission(db[admin_index], configs.admin_permission)
-    rw.write_users(db)
+    user_handler.set_user_permission(db[admin_index], configs.Permissions.admin)
+    rw.write_database(configs.DataBases.users, db)
     return True
 
 
