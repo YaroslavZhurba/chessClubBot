@@ -7,14 +7,14 @@ def get_path_to_database() -> str:
 
 
 def read_database(name):
-    f = open(get_path_to_database() + name, 'r')
+    f = open(get_path_to_database() + name, 'r', encoding='utf8')
     result = json.loads(f.read())
     f.close()
     return result
 
 
 def write_database(name, data):
-    f = open(get_path_to_database() + name, 'w')
-    f.write(json.dumps(data))
+    f = open(get_path_to_database() + name, 'w', encoding='utf8')
+    f.write(json.dumps(data, ensure_ascii=False))
     f.close()
     return
