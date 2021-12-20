@@ -32,5 +32,21 @@ def shutdown():
     TelegramBot.getUpdates(update_id)
 
 
+# Success -> True
+# Forbidden -> False
 def send_message(user_chat_id, message):
-    TelegramBot.sendMessage(user_chat_id, message)
+    try:
+        TelegramBot.sendMessage(user_chat_id, message)
+        return True
+    except Exception as e:
+        return False
+
+
+# Success -> True
+# Forbidden -> False
+def send_photo(user_chat_id, abs_path, message=''):
+    try:
+        TelegramBot.sendPhoto(user_chat_id, photo=open(abs_path,'rb'), caption=message)
+        return True
+    except Exception as e:
+        return False
