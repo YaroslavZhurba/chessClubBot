@@ -2,9 +2,9 @@ import user_handler
 
 
 def make_reason(user, text):
-    return {"chat_id" : user_handler.get_user_chat_id(user),
-            "username" : user_handler.get_user_name(user),
-            "text" : text}
+    return {"chat_id": user_handler.get_chat_id(user),
+            "username": user_handler.get_name(user),
+            "text": text}
 
 
 def get_user_name(reason):

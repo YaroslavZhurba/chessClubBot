@@ -30,6 +30,6 @@ def get_correct_answer(question):
 
 
 def get_question_by_user(user):
-    substate = user_handler.get_user_substate(user)
+    substate = user_handler.get_substate(user)
     cur_question_pos = quiz_handler.get_questions(quiz_collection.get_user_quiz(user))[substate]
     return questions_collection.get_question_by_position(cur_question_pos[0], cur_question_pos[1])

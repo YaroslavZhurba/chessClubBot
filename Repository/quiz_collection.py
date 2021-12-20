@@ -38,4 +38,4 @@ def get_quiz(id):
 def get_user_quiz(user):
     before_quizzes()
     quizzes = get_quizzes()
-    return quizzes[user_handler.get_user_random_state(user)]
+    return quizzes[user_handler.get_random_state(user)]
