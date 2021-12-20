@@ -46,7 +46,7 @@ def send_message(user_chat_id, message):
 # Forbidden -> False
 def send_photo(user_chat_id, abs_path, message=''):
     try:
-        TelegramBot.sendPhoto(user_chat_id, photo=open(abs_path,'rb'), caption=message)
+        TelegramBot.sendPhoto(user_chat_id, photo=open(abs_path, 'rb'), caption=message)
         return True
     except Exception as e:
         return False

@@ -115,6 +115,17 @@ def add_user(chat_id, username):
 
 # Success -> True
 # Failed -> False
+def remove_admin_by_name(admin_name):
+    before_users()
+    admin_index = get_user_index_by_user_name(admin_name)
+    if admin_index is not None:
+        user_handler.set_user_permission(db[admin_index], configs.Permissions.user)
+    rw.write_database(configs.DataBases.users, db)
+    return True
+
+
+# Success -> True
+# Failed -> False
 def remove_admins(admin_names):
     before_users()
     for admin_name in admin_names:
