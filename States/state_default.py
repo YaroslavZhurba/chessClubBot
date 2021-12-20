@@ -1,3 +1,7 @@
+import quiz_collection
+import quiz_results_collections
+import quiz_results_handler
+import quiz_handler
 import reasons_collection
 import state_chess_task
 import state_quiz
@@ -111,6 +115,29 @@ def list_reasons(user, user_chat_id):
     return True
 
 
+def list_quiz(args, user, user_chat_id):
+    if user_handler.get_permission(user) != configs.Permissions.admin:
+        tgbot.send_message(user_chat_id, configs.Messages.no_rights)
+        return False
+    user_res = users_collection.get_user_by_user_name(args[0])
+    if user_res is None:
+        tgbot.send_message(user_chat_id, "Таких тут нет")
+        return False
+    user_res_chat_id = user_handler.get_chat_id(user_res)
+    quiz_results = quiz_results_collections.get_by_chat_id(user_res_chat_id)
+    if quiz_results is None:
+        tgbot.send_message(user_chat_id, "Данный студент не писал квизы. Боится наверное!")
+        return False
+    s = ''
+    for res in quiz_results:
+        score = quiz_results_handler.get_score(res)
+        id = quiz_results_handler.get_quiz_id(res)
+        amount = quiz_handler.get_amount(quiz_collection.get_quiz(id))
+        s += "quiz_id: " + str(id) + ", score = " + str(score) + "/" + str(amount) + "\n"
+    tgbot.send_message(user_chat_id, s)
+    return True
+
+
 def to_quiz(command, args, user):
     user_handler.set_state(user, configs.States.quiz)
     return state_quiz.process(command, args, user)
@@ -131,6 +158,8 @@ def process(command, args, user):
         return list_admins(user_chat_id)
     elif command == '/list_reasons':
         return list_reasons(user, user_chat_id)
+    elif command == 'list_quiz':
+        return list_quiz(args, user, user_chat_id)
     elif command == '/exit':
         return make_exit(user, user_chat_id)
     elif command == 'add_admins':

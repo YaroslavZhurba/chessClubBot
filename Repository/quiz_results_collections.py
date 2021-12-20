@@ -24,3 +24,16 @@ def get_by_chat_quiz(chat_id, quiz_id):
     db.append({"chat_id": chat_id, "quiz_id": quiz_id, "score": 0})
     rw.write_database(configs.DataBases.quiz_results, db)
     return db[-1], len(db) - 1
+
+
+def get_by_chat_id(chat_id):
+    before_quiz_results()
+    lst = []
+    f = False
+    for res in db:
+        if quiz_results_handler.get_chat_id(res) == chat_id:
+            f = True
+            lst.append(res)
+    if f is False:
+        return None
+    return lst
