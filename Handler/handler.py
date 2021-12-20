@@ -1,4 +1,4 @@
-import collection
+import users_collection
 import parser_bot
 import state_chess_task
 import state_default
@@ -15,7 +15,7 @@ def user_start(user_chat_id, user_name, command):
     if command != "/start":
         return False
     user = user_handler.make_default_user_by_user_chat_id_and_name(user_chat_id, user_name)
-    collection.add_or_modify_user(user)
+    users_collection.add_or_modify_user(user)
     return True
 # True -> continue working
 # False -> shutdown
@@ -34,7 +34,7 @@ def user_start(user_chat_id, user_name, command):
 #     elif command == 'list_users':
 #         list_users(user_chat_id)
 #     else:
-#         tgbot.send_message(user_chat_id, configs.admin_greeting)
+#         tgbot.send_message(user_chat_id, configs.Messages.admin_greeting)
 #     return True
 
 
@@ -49,20 +49,18 @@ def make_decision(update):
     if user_start(user_chat_id, user_name, command):
         return
 
-    user = collection.get_user_by_user_chat_id(user_chat_id)
+    user = users_collection.get_user_by_user_chat_id(user_chat_id)
     # todo what if user is not in our database
     if user is None:
         return
     user_state = user_handler.get_user_state(user)
 
-    # switch
-    if user_state == configs.default_state_id:
+    if user_state == configs.States.default:
         state_default.process(command, args, user)
-    elif user_state == configs.quiz_state_id:
+    elif user_state == configs.States.quiz:
         state_quiz.process(command, args, user)
-    elif user_state == configs.chess_task_state_id:
+    elif user_state == configs.States.board_task:
         state_chess_task.process(command, args, user)
-
 
 
 def process(updates):

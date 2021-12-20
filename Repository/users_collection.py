@@ -3,20 +3,20 @@ import user_handler
 import configs
 
 # local functions and variables
-users = None
+db = None
 
 
 # read database if needed
 def before_users():
-    global users
-    if users is None:
-        users = rw.read_users()
+    global db
+    if db is None:
+        db = rw.read_database('database')
 
 
 def get_user_index_by_user_chat_id(user_chat_id):
     before_users()
-    for i in range(len(users)):
-        user = users[i]
+    for i in range(len(db)):
+        user = db[i]
         if user_handler.get_user_chat_id(user) == user_chat_id:
             return i
     return None
@@ -24,8 +24,8 @@ def get_user_index_by_user_chat_id(user_chat_id):
 
 def get_user_index_by_user_name(user_name):
     before_users()
-    for i in range(len(users)):
-        user = users[i]
+    for i in range(len(db)):
+        user = db[i]
         if user_handler.get_user_name(user) == user_name:
             return i
     return None
@@ -35,13 +35,13 @@ def get_user_index_by_user_name(user_name):
 def add_admin_local(admin_name):
     before_users()
     admin_index = get_user_index_by_user_name(admin_name)
-    user_handler.set_user_permission(users[admin_index],configs.admin_permission)
+    user_handler.set_user_permission(db[admin_index], configs.admin_permission)
 
 
 # public functions and variables
 def find_user_chat_id_by_user_name(user_name):
     before_users()
-    for user in users:
+    for user in db:
         if user_handler.get_user_name(user) == user_name:
             return user_handler.get_user_chat_id(user)
     return None
@@ -49,13 +49,13 @@ def find_user_chat_id_by_user_name(user_name):
 
 def get_all_users():
     before_users()
-    return users
+    return db
 
 
 def get_all_admins():
     before_users()
     admins = []
-    for user in users:
+    for user in db:
         if user_handler.get_user_permission(user) == configs.admin_permission:
             admins.append(user)
     return admins
@@ -71,7 +71,7 @@ def is_user_exists(user_chat_id):
 # todo check
 def is_admin_exists(admin_chat_id):
     before_users()
-    for user in users:
+    for user in db:
         if user_handler.get_user_chat_id(user) == admin_chat_id and \
                 user_handler.get_user_permission(user) == configs.admin_permission:
             return True
@@ -86,8 +86,8 @@ def add_admin_by_name(admin_name):
     admin_index = get_user_index_by_user_name(admin_name)
     if admin_index is None:
         return False
-    user_handler.set_user_permission(users[admin_index], configs.admin_permission)
-    rw.write_users(users)
+    user_handler.set_user_permission(db[admin_index], configs.admin_permission)
+    rw.write_users(db)
     return True
 
 
@@ -96,7 +96,7 @@ def add_admins_by_name(admin_names):
     before_users()
     for admin_name in admin_names:
         add_admin_local(admin_name)
-    rw.write_users(users)
+    rw.write_users(db)
 
 
 # Success -> True
@@ -108,8 +108,8 @@ def add_user(chat_id, username):
     user = {'chat_id': chat_id, 'username': username,
             'permission': configs.user_permission, "state": configs.default_state_id,
             }
-    users.append(user)
-    rw.write_users(users)
+    db.append(user)
+    rw.write_users(db)
     return True
 
 
@@ -120,14 +120,14 @@ def remove_admins(admin_names):
     for admin_name in admin_names:
         admin_index = get_user_index_by_user_name(admin_name)
         if admin_index is not None:
-            user_handler.set_user_permission(users[admin_index], configs.user_permission)
-    rw.write_usesrs(users)
+            user_handler.set_user_permission(db[admin_index], configs.user_permission)
+    rw.write_usesrs(db)
     return True
 
 
 def is_user_admin(user_chat_id):
     admin_index = get_user_index_by_user_chat_id(user_chat_id)
-    if admin_index is not None and user_handler.get_user_permission(users[admin_index]) == configs.admin_permission:
+    if admin_index is not None and user_handler.get_user_permission(db[admin_index]) == configs.admin_permission:
         return True
     return False
 
@@ -137,7 +137,7 @@ def is_user_admin(user_chat_id):
 def get_user_by_user_chat_id(user_chat_id):
     user_index = get_user_index_by_user_chat_id(user_chat_id)
     if user_index is not None:
-        return users[user_index]
+        return db[user_index]
     return None
 
 
@@ -146,7 +146,7 @@ def get_user_by_user_chat_id(user_chat_id):
 def get_user_by_user_name(user_name):
     user_index = get_user_index_by_user_name(user_name)
     if user_index is not None:
-        return users[user_index]
+        return db[user_index]
     return None
 
 
@@ -154,10 +154,10 @@ def add_or_modify_user(user):
     user_chat_id = user_handler.get_user_chat_id(user)
     user_index = get_user_index_by_user_chat_id(user_chat_id)
     if user_index is None:
-        users.append(user)
+        db.append(user)
     else:
         user[user_index] = user
-    rw.write_users(users)
+    rw.write_users(db)
 
 
 # var = None
@@ -173,3 +173,4 @@ def add_or_modify_user(user):
 # def set_var(value):
 #     global var
 #     var = value
+

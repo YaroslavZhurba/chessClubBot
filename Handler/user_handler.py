@@ -2,9 +2,9 @@ import configs
 
 
 def make_default_user_by_user_chat_id_and_name(user_chat_id, user_name):
-    user = {"chat_id": user_chat_id, "username": user_name, "permission": configs.user_permission,
-            "state": configs.default_state_id, "substate": configs.default_substate_id,
-            "random_state": configs.default_random_state_id}
+    user = {"chat_id": user_chat_id, "username": user_name, "permission": configs.Permissions.user,
+            "state": configs.States.default, "substate": configs.Substates.default,
+            "random_state": configs.RandomStates.default}
     return user
 
 
@@ -21,7 +21,7 @@ def get_user_chat_id(user):
 
 
 def is_user_admin(user):
-    return user["permission"] == configs.user_permission
+    return user["permission"] == configs.Permissions.user
 
 
 def get_user_state(user):
@@ -53,6 +53,6 @@ def set_user_random_state(user, random_state_id):
 
 
 def set_user_default_states(user):
-    set_user_state(user, configs.default_state_id)
-    set_user_substate(user, configs.default_substate_id)
-    set_user_random_state(user, configs.default_random_state_id)
+    set_user_state(user, configs.States.default)
+    set_user_substate(user, configs.Substates.default)
+    set_user_random_state(user, configs.RandomStates.default)

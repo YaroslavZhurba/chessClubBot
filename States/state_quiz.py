@@ -1,6 +1,6 @@
 import user_handler
 import configs
-import collection
+import users_collection
 import tgbot
 
 
