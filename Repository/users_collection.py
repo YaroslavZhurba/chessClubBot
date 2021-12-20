@@ -160,6 +160,22 @@ def add_or_modify_user(user):
     rw.write_database(configs.DataBases.users, db)
 
 
+def remove_user_by_user_chat_id(user_chat_id):
+    user = get_user_by_user_chat_id(user_chat_id)
+    if user is None:
+        return
+    db.remove(user)
+    rw.write_database(configs.DataBases.users, db)
+
+
+def remove_user_by_user_name(user_name):
+    user = get_user_by_user_name(user_name)
+    if user is None:
+        return
+    db.remove(user)
+    rw.write_database(configs.DataBases.users, db)
+
+
 # var = None
 #
 #
