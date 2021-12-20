@@ -1,8 +1,8 @@
 class DataBases:
-    users = "database"
-    quiz = "quiz"
-    questions = "questions"
-    quiz_results = "quiz_results"
+    users = "users.txt"
+    quiz = "quiz.txt"
+    questions = "questions.txt"
+    quiz_results = "quiz_results.txt"
 
 class Messages:
     admin_greeting = "Здоров, командир! Че делаем?"
