@@ -1,3 +1,9 @@
+class DataBases:
+    users = "database"
+    quiz = "quiz"
+    questions = "questions"
+    quiz_results = "quiz_results"
+
 class Messages:
     admin_greeting = "Здоров, командир! Че делаем?"
     user_greeting = "Здравствуйте уважаемые дамы и господа!"

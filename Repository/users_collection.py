@@ -10,7 +10,7 @@ db = None
 def before_users():
     global db
     if db is None:
-        db = rw.read_database('database')
+        db = rw.read_database(configs.DataBases.users)
 
 
 def get_user_index_by_user_chat_id(user_chat_id):
