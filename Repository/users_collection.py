@@ -157,7 +157,7 @@ def add_or_modify_user(user):
         db.append(user)
     else:
         user[user_index] = user
-    rw.write_users(db)
+    rw.write_database(configs.DataBases.users, db)
 
 
 # var = None

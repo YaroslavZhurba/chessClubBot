@@ -1,2 +1,0 @@
-[{"chat_id": 399682596, "username": "Yaroslav239", "permission" : 1, "state" : 0, "substate" : 0, "random_state" : 0},
-{"chat_id": 168224409, "username": "HACTEHbKA", "permission" : 0, "state" : 0, "substate" : 0, "random_state" : 0}]

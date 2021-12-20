@@ -3,7 +3,7 @@ import json
 
 
 def get_path_to_database() -> str:
-    return os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), os.pardir)) + "/DataBase"
+    return os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), os.pardir)) + "/DataBase/"
 
 
 def read_database(name):

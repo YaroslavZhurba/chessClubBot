@@ -17,25 +17,6 @@ def user_start(user_chat_id, user_name, command):
     user = user_handler.make_default_user_by_user_chat_id_and_name(user_chat_id, user_name)
     users_collection.add_or_modify_user(user)
     return True
-# True -> continue working
-# False -> shutdown
-# def reply_admin(text, user_chat_id):
-#     command, args = parser.get_command_and_args(text)
-#     if command == 'exit':
-#         return False
-#     if command == 'ask':
-#         ask_users(args)
-#     elif command == 'add_admins_by_name':
-#         collection.add_admins_by_name(args)
-#     elif command == 'remove_admins':
-#         collection.remove_admins(args)
-#     elif command == 'list_admins':
-#         list_admins(user_chat_id)
-#     elif command == 'list_users':
-#         list_users(user_chat_id)
-#     else:
-#         tgbot.send_message(user_chat_id, configs.Messages.admin_greeting)
-#     return True
 
 
 # todo rewrite
