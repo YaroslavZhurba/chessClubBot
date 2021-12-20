@@ -14,7 +14,7 @@ Maybe this code will be need in the future:
 # Success -> True
 # Failed -> False
 def set_default_user_states_by_user_chat_id(user_chat_id):
-    user_index = get_user_index_by_user_chat_id(user_chat_id)
+    user_index = get_user_index_by_chat_id(user_chat_id)
     if user_index is None:
         return False
     users[user_index]["state"] = configs.default_state_id
@@ -27,7 +27,7 @@ def set_default_user_states_by_user_chat_id(user_chat_id):
 # Success -> True
 # Failed -> False
 def set_user_state_by_user_chat_id(user_chat_id, state_id):
-    user_index = get_user_index_by_user_chat_id(user_chat_id)
+    user_index = get_user_index_by_chat_id(user_chat_id)
     if user_index is None:
         return False
     users[user_index]["state"] = state_id
@@ -38,7 +38,7 @@ def set_user_state_by_user_chat_id(user_chat_id, state_id):
 # Success -> True
 # Failed -> False
 def set_user_substate_by_user_chat_id(user_chat_id, substate_id):
-    user_index = get_user_index_by_user_chat_id(user_chat_id)
+    user_index = get_user_index_by_chat_id(user_chat_id)
     if user_index is None:
         return False
     users[user_index]["substate"] = substate_id
@@ -49,7 +49,7 @@ def set_user_substate_by_user_chat_id(user_chat_id, substate_id):
 # Success -> True
 # Failed -> False
 def set_user_random_state_by_user_chat_id(user_chat_id, random_state_id):
-    user_index = get_user_index_by_user_chat_id(user_chat_id)
+    user_index = get_user_index_by_chat_id(user_chat_id)
     if user_index is None:
         return False
     users[user_index]["random_state"] = random_state_id
@@ -60,7 +60,7 @@ def set_user_random_state_by_user_chat_id(user_chat_id, random_state_id):
 # Success -> state
 # Failed -> None
 def get_user_state_by_user_chat_id(user_chat_id, state_id):
-    user_index = get_user_index_by_user_chat_id(user_chat_id)
+    user_index = get_user_index_by_chat_id(user_chat_id)
     if user_index is None:
         return False
     users[user_index]["state"] = state_id
@@ -71,7 +71,7 @@ def get_user_state_by_user_chat_id(user_chat_id, state_id):
 # Success -> substate
 # Failed -> None
 def get_user_substate_by_user_chat_id(user_chat_id, substate_id):
-    user_index = get_user_index_by_user_chat_id(user_chat_id)
+    user_index = get_user_index_by_chat_id(user_chat_id)
     if user_index is None:
         return False
     users[user_index]["substate"] = substate_id
@@ -82,7 +82,7 @@ def get_user_substate_by_user_chat_id(user_chat_id, substate_id):
 # Success -> random_state
 # Failed ->
 def get_user_random_state_by_user_chat_id(user_chat_id):
-    user_index = get_user_index_by_user_chat_id(user_chat_id)
+    user_index = get_user_index_by_chat_id(user_chat_id)
     if user_index is None:
         return None
     user_handler.users[user_index]

@@ -13,7 +13,7 @@ def before_users():
         db = rw.read_database(configs.DataBases.users)
 
 
-def get_user_index_by_user_chat_id(user_chat_id):
+def get_user_index_by_chat_id(user_chat_id):
     before_users()
     for i in range(len(db)):
         user = db[i]
@@ -63,7 +63,7 @@ def get_all_admins():
 
 def is_user_exists(user_chat_id):
     before_users()
-    if get_user_index_by_user_chat_id(user_chat_id) is None:
+    if get_user_index_by_chat_id(user_chat_id) is None:
         return False
     return True
 
@@ -136,9 +136,9 @@ def remove_admins(admin_names):
     return True
 
 
-def is_user_admin(user_chat_id):
+def is_user_admin(chat_id):
     before_users()
-    admin_index = get_user_index_by_user_chat_id(user_chat_id)
+    admin_index = get_user_index_by_chat_id(chat_id)
     if admin_index is not None and user_handler.get_permission(db[admin_index]) == configs.Permissions.admin:
         return True
     return False
@@ -148,7 +148,7 @@ def is_user_admin(user_chat_id):
 # Failed -> None
 def get_user_by_user_chat_id(user_chat_id):
     before_users()
-    user_index = get_user_index_by_user_chat_id(user_chat_id)
+    user_index = get_user_index_by_chat_id(user_chat_id)
     if user_index is not None:
         return db[user_index]
     return None
@@ -167,7 +167,7 @@ def get_user_by_user_name(user_name):
 def add_or_modify_user(user):
     before_users()
     user_chat_id = user_handler.get_chat_id(user)
-    user_index = get_user_index_by_user_chat_id(user_chat_id)
+    user_index = get_user_index_by_chat_id(user_chat_id)
     if user_index is None:
         db.append(user)
     else:
@@ -175,18 +175,18 @@ def add_or_modify_user(user):
     rw.write_database(configs.DataBases.users, db)
 
 
-def remove_user_by_user_chat_id(user_chat_id):
+def remove_user_by_chat_id(chat_id):
     before_users()
-    user = get_user_by_user_chat_id(user_chat_id)
+    user = get_user_by_user_chat_id(chat_id)
     if user is None:
         return
     db.remove(user)
     rw.write_database(configs.DataBases.users, db)
 
 
-def remove_user_by_user_name(user_name):
+def remove_user_by_name(name):
     before_users()
-    user = get_user_by_user_name(user_name)
+    user = get_user_by_user_name(name)
     if user is None:
         return
     db.remove(user)

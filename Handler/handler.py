@@ -22,7 +22,7 @@ def user_start(user_chat_id, user_name, command):
 
 def user_stop(update):
     user_chat_id = update_handler.get_user_chat_id_stopped(update)
-    users_collection.remove_user_by_user_chat_id(user_chat_id)
+    users_collection.remove_user_by_chat_id(user_chat_id)
 
 
 # todo rewrite

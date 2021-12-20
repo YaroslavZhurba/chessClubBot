@@ -11,7 +11,7 @@ def get_user_name(reason):
     return reason["username"]
 
 
-def get_user_chat_id(reason):
+def get_chat_id(reason):
     return reason["chat_id"]
 
 
