@@ -20,3 +20,26 @@ update = {
     'entities': [{'offset': 0, 'length': 6, 'type': 'bot_command'}]
   }
 }
+
+update = {'update_id': 108826157,
+  'my_chat_member': {'chat': {'id': 399682596,
+    'first_name': 'Yaroslav',
+    'username': 'Yaroslav239',
+    'type': 'private'},
+   'from': {'id': 399682596,
+    'is_bot': False,
+    'first_name': 'Yaroslav',
+    'username': 'Yaroslav239',
+    'language_code': 'ru'},
+   'date': 1639951293,
+   'old_chat_member': {'user': {'id': 2091745164,
+     'is_bot': True,
+     'first_name': 'test_planet_bot',
+     'username': 'test_planet_1337_bot'},
+    'status': 'member'},
+   'new_chat_member': {'user': {'id': 2091745164,
+     'is_bot': True,
+     'first_name': 'test_planet_bot',
+     'username': 'test_planet_1337_bot'},
+    'status': 'kicked',
+    'until_date': 0}}}

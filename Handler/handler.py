@@ -19,8 +19,17 @@ def user_start(user_chat_id, user_name, command):
     return True
 
 
+def user_stop(update):
+    user_chat_id = update_handler.get_user_chat_id_stopped(update)
+    users_collection.remove_user_by_user_chat_id(user_chat_id)
+
+
 # todo rewrite
 def make_decision(update):
+    if update_handler.is_user_stopped_bot(update):
+        user_stop(update)
+        return
+
     text = update_handler.get_text(update)
     if text is None:
         return

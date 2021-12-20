@@ -20,3 +20,17 @@ def get_user_name(update):
 
 def get_user_chat_id(update):
     return update['message']['chat']['id']
+
+
+def is_user_stopped_bot(update):
+    if update.get('my_chat_member') is None:
+        return False
+    if update['my_chat_member'].get('new_chat_member') is None:
+        return False
+    if update['my_chat_member']['new_chat_member']['status'] == 'kicked':
+        return True
+    return False
+
+
+def get_user_chat_id_stopped(update):
+    return update['my_chat_member']['chat']['id']
