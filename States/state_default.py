@@ -10,7 +10,7 @@ def list_admins(user_chat_id):
     admins = users_collection.get_all_admins()
     lst = []
     for admin in admins:
-        lst.append(user_handler.get_user_name(admin))
+        lst.append(user_handler.get_name(admin))
     tgbot.send_message(user_chat_id, str(lst))
     return True
 
@@ -20,17 +20,17 @@ def list_users(user_chat_id):
     users = users_collection.get_all_users()
     lst = []
     for user in users:
-        lst.append(user_handler.get_user_name(user))
+        lst.append(user_handler.get_name(user))
     tgbot.send_message(user_chat_id, str(lst))
     return True
 
 
 def ask_users(names, user):
-    if user_handler.get_user_permission(user) != configs.Permissions.admin:
-        user_chat_id = user_handler.get_user_chat_id(user)
+    if user_handler.get_permission(user) != configs.Permissions.admin:
+        user_chat_id = user_handler.get_chat_id(user)
         tgbot.send_message(user_chat_id, configs.Messages.no_rights)
         return False
-    user_chat_id = user_handler.get_user_chat_id(user)
+    user_chat_id = user_handler.get_chat_id(user)
     lst = []
     all_right = True
     for name in names:
@@ -40,7 +40,7 @@ def ask_users(names, user):
             lst.append(name)
         else:
             user = users_collection.get_user_by_user_chat_id(user_chat_id)
-            user_handler.set_user_state(user, configs.States.write_reason)
+            user_handler.set_state(user, configs.States.write_reason)
             users_collection.add_or_modify_user(user)
     if all_right is True:
         tgbot.send_message(user_chat_id, "Повистка до всех дошла :)")
@@ -51,19 +51,19 @@ def ask_users(names, user):
 
 
 def make_exit(user, user_chat_id):
-    if user_handler.get_user_permission(user) != configs.Permissions.admin:
+    if user_handler.get_permission(user) != configs.Permissions.admin:
         tgbot.send_message(user_chat_id, configs.Messages.no_rights)
         return False
     configs.shutdown = True
     admins = users_collection.get_all_admins()
     for admin in admins:
-        admin_chat_id = user_handler.get_user_chat_id(admin)
+        admin_chat_id = user_handler.get_chat_id(admin)
         tgbot.send_message(admin_chat_id, configs.Messages.bye_bye)
     return True
 
 
 def say_hello(user, user_chat_id):
-    if user_handler.get_user_permission(user) != configs.Permissions.admin:
+    if user_handler.get_permission(user) != configs.Permissions.admin:
         tgbot.send_message(user_chat_id, configs.Messages.user_greeting)
         return True
     tgbot.send_message(user_chat_id, configs.Messages.admin_greeting)
@@ -71,7 +71,12 @@ def say_hello(user, user_chat_id):
 
 
 def to_quiz(command, args, user):
-    user_handler.set_user_state(user, configs.States.quiz)
+    user_handler.set_state(user, configs.States.quiz)
+    return state_quiz.process(command, args, user)
+
+
+def to_chess_task(command, args, user):
+    user_handler.set_state(user, configs.States.quiz)
     return state_quiz.process(command, args, user)
 
 
@@ -106,7 +111,7 @@ def remove_admins(args, user_chat_id):
 
 
 def process(command, args, user):
-    user_chat_id = user_handler.get_user_chat_id(user)
+    user_chat_id = user_handler.get_chat_id(user)
     if command == 'ask':
         return ask_users(args, user)
     elif command == '/list_users':

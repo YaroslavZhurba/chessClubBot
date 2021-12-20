@@ -44,7 +44,7 @@ def make_decision(update):
     # todo what if user is not in our database
     if user is None:
         return
-    user_state = user_handler.get_user_state(user)
+    user_state = user_handler.get_state(user)
 
     if user_state == configs.States.default:
         state_default.process(command, args, user)

@@ -8,51 +8,51 @@ def make_default_user_by_user_chat_id_and_name(user_chat_id, user_name):
     return user
 
 
-def get_user_name(user):
+def get_name(user):
     return user["username"]
 
 
-def get_user_permission(user):
+def get_permission(user):
     return user["permission"]
 
 
-def get_user_chat_id(user):
+def get_chat_id(user):
     return user["chat_id"]
 
 
-def is_user_admin(user):
+def is_admin(user):
     return user["permission"] == configs.Permissions.user
 
 
-def get_user_state(user):
+def get_state(user):
     return user["state"]
 
 
-def get_user_substate(user):
+def get_substate(user):
     return user["substate"]
 
 
-def get_user_random_state(user):
+def get_random_state(user):
     return user["random_state"]
 
 
-def set_user_permission(user, permission_id):
+def set_permission(user, permission_id):
     user["permission"] = permission_id
 
 
-def set_user_state(user, state_id):
+def set_state(user, state_id):
     user["state"] = state_id
 
 
-def set_user_substate(user, substate_id):
+def set_substate(user, substate_id):
     user["substate"] = substate_id
 
 
-def set_user_random_state(user, random_state_id):
+def set_random_state(user, random_state_id):
     user["random_state"] = random_state_id
 
 
-def set_user_default_states(user):
-    set_user_state(user, configs.States.default)
-    set_user_substate(user, configs.Substates.default)
-    set_user_random_state(user, configs.RandomStates.default)
+def set_default_states(user):
+    set_state(user, configs.States.default)
+    set_substate(user, configs.Substates.default)
+    set_random_state(user, configs.RandomStates.default)
