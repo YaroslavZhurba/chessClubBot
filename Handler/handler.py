@@ -50,7 +50,7 @@ def make_decision(update):
         state_default.process(command, args, user)
     elif user_state == configs.States.quiz:
         state_quiz.process(command, args, user)
-    elif user_state == configs.States.board_task:
+    elif user_state == configs.States.chess_task:
         state_chess_task.process(command, args, user)
     elif user_state == configs.States.write_reason:
         state_write_reason.process(text, user)

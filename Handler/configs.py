@@ -4,6 +4,7 @@ class DataBases:
     questions = "questions.txt"
     quiz_results = "quiz_results.txt"
     reasons = "reasons.txt"
+    chess_tasks = "chess_tasks.txt"
 
 
 class Messages:
@@ -12,6 +13,10 @@ class Messages:
     why_no_attendance = "Че не ходим? + долг по физре"
     no_rights = "Кажется, что у вас недостаточно прав. Очень жаль.."
     bye_bye = "Я умир :("
+
+    class ChessTasksAnswers:
+        correct = "ОК"
+        incorrect = "Не ОК"
 
 
 class Permissions:
@@ -22,7 +27,7 @@ class Permissions:
 class States:
     default = 0
     quiz = 1
-    board_task = 2
+    chess_task = 2
     write_reason = 3
 
 

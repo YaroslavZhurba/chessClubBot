@@ -1,3 +1,5 @@
+import os
+
 import telepot
 import configs
 
@@ -42,9 +44,14 @@ def send_message(user_chat_id, message):
         return False
 
 
+def get_path_to_chess_task() -> str:
+    return os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), os.pardir)) + "/ChessTasks/"
+
+
 # Success -> True
 # Forbidden -> False
-def send_photo(user_chat_id, abs_path, message=''):
+def send_photo(user_chat_id, name, message=''):
+    abs_path = get_path_to_chess_task() + name
     try:
         TelegramBot.sendPhoto(user_chat_id, photo=open(abs_path, 'rb'), caption=message)
         return True

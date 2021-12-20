@@ -1,3 +1,4 @@
+import state_chess_task
 import state_quiz
 import user_handler
 import configs
@@ -70,16 +71,6 @@ def say_hello(user, user_chat_id):
     return True
 
 
-def to_quiz(command, args, user):
-    user_handler.set_state(user, configs.States.quiz)
-    return state_quiz.process(command, args, user)
-
-
-def to_chess_task(command, args, user):
-    user_handler.set_state(user, configs.States.quiz)
-    return state_quiz.process(command, args, user)
-
-
 def add_admins(args, user_chat_id):
     lst = []
     all_right = True
@@ -110,6 +101,16 @@ def remove_admins(args, user_chat_id):
     return True
 
 
+def to_quiz(command, args, user):
+    user_handler.set_state(user, configs.States.quiz)
+    return state_quiz.process(command, args, user)
+
+
+def to_chess_task(command, args, user):
+    user_handler.set_state(user, configs.States.chess_task)
+    return state_chess_task.process(command, args, user)
+
+
 def process(command, args, user):
     user_chat_id = user_handler.get_chat_id(user)
     if command == 'ask':
@@ -120,11 +121,13 @@ def process(command, args, user):
         return list_admins(user_chat_id)
     elif command == '/exit':
         return make_exit(user, user_chat_id)
-    elif command == 'quiz':
-        return to_quiz(command, args, user)
     elif command == 'add_admins':
         return add_admins(args, user_chat_id)
     elif command == 'remove_admins':
         return remove_admins(args, user_chat_id)
+    elif command == 'quiz':
+        return to_quiz(command, args, user)
+    elif command == "chess_task":
+        return to_chess_task(command, args, user)
     else:
         return say_hello(user, user_chat_id)
