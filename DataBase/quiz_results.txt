@@ -1,0 +1,1 @@
+[{"chat_id": 399682596, "quiz_id": 1, "score": 1}, {"chat_id": 168224409, "quiz_id": 0, "score": 3}, {"chat_id": 168224409, "quiz_id": 1, "score": 2}]

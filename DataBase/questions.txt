@@ -1,0 +1,7 @@
+[{"complexity": 0, "amount": 0, "questions":
+    [{"id": 0, "question": "Сколько пешек стоит 1 конь?", "answers": ["1", "3", "5", "9"], "correct_answer_no": "2"},
+     {"id": 1, "question": "Сколько пешек стоит 1 ладья?", "answers": ["1", "3", "5", "9"], "correct_answer_no": "3"}]},
+ {"complexity": 1, "amount": 0, "questions":
+    [{"id": 0, "question": "Как зовут преподавателя?",
+        "answers": ["Ярослав Журба","Ярослав Хурма", "Святослав Журба", "Святослав Хурма"], "correct_answer_no": "1"}]}
+]

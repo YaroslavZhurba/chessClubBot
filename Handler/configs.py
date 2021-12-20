@@ -1,6 +1,6 @@
 class DataBases:
     users = "users.txt"
-    quiz = "quizes.txt"
+    quiz = "quizzes.txt"
     questions = "questions.txt"
     quiz_results = "quiz_results.txt"
     reasons = "reasons.txt"
