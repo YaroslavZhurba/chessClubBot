@@ -167,7 +167,7 @@ def add_or_modify_user(user):
     if user_index is None:
         db.append(user)
     else:
-        user[user_index] = user
+        db[user_index] = user
     rw.write_database(configs.DataBases.users, db)
 
 
@@ -185,19 +185,3 @@ def remove_user_by_user_name(user_name):
         return
     db.remove(user)
     rw.write_database(configs.DataBases.users, db)
-
-
-# var = None
-#
-#
-# def get_var(default_value):
-#     global var
-#     if var is None:
-#         var = default_value
-#     return var
-#
-#
-# def set_var(value):
-#     global var
-#     var = value
-

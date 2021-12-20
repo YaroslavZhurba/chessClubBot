@@ -38,6 +38,10 @@ def ask_users(names, user):
         if tgbot.send_message(user_chat_id, configs.Messages.why_no_attendance) is False:
             all_right = False
             lst.append(name)
+        else:
+            user = users_collection.get_user_by_user_chat_id(user_chat_id)
+            user_handler.set_user_state(user, configs.States.write_reason)
+            users_collection.add_or_modify_user(user)
     if all_right is True:
         tgbot.send_message(user_chat_id, "Повистка до всех дошла :)")
     else:

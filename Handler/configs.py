@@ -3,6 +3,7 @@ class DataBases:
     quiz = "quizes.txt"
     questions = "questions.txt"
     quiz_results = "quiz_results.txt"
+    reasons = "reasons.txt"
 
 
 class Messages:
@@ -22,6 +23,7 @@ class States:
     default = 0
     quiz = 1
     board_task = 2
+    write_reason = 3
 
 
 class Substates:

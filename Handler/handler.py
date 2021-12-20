@@ -1,3 +1,4 @@
+import state_write_reason
 import users_collection
 import parser_bot
 import state_chess_task
@@ -51,6 +52,8 @@ def make_decision(update):
         state_quiz.process(command, args, user)
     elif user_state == configs.States.board_task:
         state_chess_task.process(command, args, user)
+    elif user_state == configs.States.write_reason:
+        state_write_reason.process(text, user)
 
 
 def process(updates):
