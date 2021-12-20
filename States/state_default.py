@@ -1,3 +1,4 @@
+import reasons_collection
 import state_quiz
 import user_handler
 import configs
@@ -110,6 +111,15 @@ def remove_admins(args, user_chat_id):
     return True
 
 
+def list_reasons(user, user_chat_id):
+    if user_handler.get_permission(user) != configs.Permissions.admin:
+        tgbot.send_message(user_chat_id, configs.Messages.no_rights)
+        return False
+    reasons = reasons_collection.get_all_reasons()
+    tgbot.send_message(user_chat_id, str(reasons))
+    return True
+
+
 def process(command, args, user):
     user_chat_id = user_handler.get_chat_id(user)
     if command == 'ask':
@@ -118,6 +128,8 @@ def process(command, args, user):
         return list_users(user_chat_id)
     elif command == '/list_admins':
         return list_admins(user_chat_id)
+    elif command == '/list_reasons':
+        return list_reasons(user, user_chat_id)
     elif command == '/exit':
         return make_exit(user, user_chat_id)
     elif command == 'quiz':
