@@ -137,6 +137,7 @@ def remove_admins(admin_names):
 
 
 def is_user_admin(user_chat_id):
+    before_users()
     admin_index = get_user_index_by_user_chat_id(user_chat_id)
     if admin_index is not None and user_handler.get_user_permission(db[admin_index]) == configs.Permissions.admin:
         return True
@@ -146,6 +147,7 @@ def is_user_admin(user_chat_id):
 # Success -> user
 # Failed -> None
 def get_user_by_user_chat_id(user_chat_id):
+    before_users()
     user_index = get_user_index_by_user_chat_id(user_chat_id)
     if user_index is not None:
         return db[user_index]
@@ -155,6 +157,7 @@ def get_user_by_user_chat_id(user_chat_id):
 # Success -> user
 # Failed -> None
 def get_user_by_user_name(user_name):
+    before_users()
     user_index = get_user_index_by_user_name(user_name)
     if user_index is not None:
         return db[user_index]
@@ -162,6 +165,7 @@ def get_user_by_user_name(user_name):
 
 
 def add_or_modify_user(user):
+    before_users()
     user_chat_id = user_handler.get_user_chat_id(user)
     user_index = get_user_index_by_user_chat_id(user_chat_id)
     if user_index is None:
@@ -172,6 +176,7 @@ def add_or_modify_user(user):
 
 
 def remove_user_by_user_chat_id(user_chat_id):
+    before_users()
     user = get_user_by_user_chat_id(user_chat_id)
     if user is None:
         return
@@ -180,6 +185,7 @@ def remove_user_by_user_chat_id(user_chat_id):
 
 
 def remove_user_by_user_name(user_name):
+    before_users()
     user = get_user_by_user_name(user_name)
     if user is None:
         return

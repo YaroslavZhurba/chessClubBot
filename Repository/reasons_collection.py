@@ -35,6 +35,7 @@ def get_reason_index_by_user_name(user_name):
 # Success -> reason
 # Failed -> None
 def get_reason_by_chat_id(user_chat_id):
+    before_reasons()
     reason_index = get_reason_index_by_user_chat_id(user_chat_id)
     if reason_index is not None:
         return db[reason_index]
@@ -44,6 +45,7 @@ def get_reason_by_chat_id(user_chat_id):
 # Success -> reason
 # Failed -> None
 def get_user_by_user_name(user_name):
+    before_reasons()
     reason_index = get_reason_index_by_user_name(user_name)
     if reason_index is not None:
         return db[reason_index]
@@ -56,8 +58,9 @@ def get_all_reasons():
 
 
 def add_or_modify_reason(reason):
+    before_reasons()
     user_chat_id = reason_handler.get_user_chat_id(reason)
-    reason_index = get_reason_index_by_user_name(user_chat_id)
+    reason_index = get_reason_index_by_user_chat_id(user_chat_id)
     if reason_index is None:
         db.append(reason)
     else:
