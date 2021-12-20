@@ -1,3 +1,4 @@
+import reasons_collection
 import state_chess_task
 import state_quiz
 import user_handler
